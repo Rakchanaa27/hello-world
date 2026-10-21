@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<api context="/loanTransferAPI" name="LoanTransferAPI" version="1.0.0" version-type="url" xmlns="http://ws.apache.org/ns/synapse">
-    <resource methods="POST" uri-template="/apply" inSequence="interestCalculationSeq">
-    </resource>
-
-</api>

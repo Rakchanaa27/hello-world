@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="tel-Employee-Payroll-v1-employee-in-sequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <log>
+        <property name="Status" value="Starts The Process"/>
+    </log>
+    <property name="payrollMonth" expression="//*[local-name()='payrollMonth']/text()" scope="default" type="STRING"/>
+    <property name="department" expression="//*[local-name()='department']/text()" scope="default" type="STRING"/>
+    <property name="employeeCount" expression="json-eval($.employees.length())" scope="default" type="INTEGER"/>
+    <log>
+        <property name="payrollMonth" expression="$ctx:payrollMonth"/>
+        <property name="department" expression="$ctx:department"/>
+        <property name="employeeCount" expression="$ctx:employeeCount"/>
+    </log>
+     <sequence key="tel-Employee-Payroll-v1-employeevalidation-sequence"/>
+    <foreach collection="${payload.employees}" parallel-execution="false">
+        <sequence>
+            <property name="employeeId" expression="//*[local-name()='employeeId']/text()" scope="default" type="STRING"/>
+            <property name="name" expression="//*[local-name()='name']/text()" scope="default" type="STRING"/>
+            <property name="basic" expression="//*[local-name()='basic']/text()" scope="default" type="STRING"/>
+            <property name="allowance" expression="//*[local-name()='allowance']/text()" scope="default" type="STRING"/>
+            <property name="bonus" expression="//*[local-name()='bonus']/text()" scope="default" type="STRING"/>
+            <property name="deduction" expression="//*[local-name()='deduction']/text()" scope="default" type="STRING"/>
+            <log>
+                <property name="employeeId" expression="$ctx:employeeId"/>
+                <property name="name" expression="$ctx:name"/>
+                <property name="basic" expression="$ctx:basic"/>
+                <property name="allowance" expression="$ctx:allowance"/>
+                <property name="bonus" expression="$ctx:bonus"/>
+                <property name="deduction" expression="$ctx:deduction"/>
+            </log>
+            <sequence key="tel-Employee-Payroll-v1-iterateemployeevalidation-sequence"/>
+            <sequence key="tel-Employee-Payroll-v1-iterateemployeecalculate-sequence"/>
+        </sequence>
+    </foreach>
+    <property name="employees" expression="json-eval($.employees)" scope="default"/>
+    <log>
+        <property name="employees" expression="$ctx:employees"/>
+    </log>
+    <sequence key="tel-Employee-Payroll-v1-employeetotal-sequence"/>
+    <sequence key="tel-Employee-Payroll-v1-employeefinal-sequence"/>
+    <respond/>
+</sequence>

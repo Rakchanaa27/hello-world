@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="tel-Employee-Payroll-v1-employeetotal-sequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+ <script language="js"><![CDATA[ 
+        var data = mc.getPayloadJSON();
+        var employees = data.employees;
+        var totalGross = 0;
+        var totalTax = 0;
+        var totalDeduction = 0;
+        var totalNet = 0;
+        var payrollStatus = "PROCESSED";
+        for (var i = 0 ; i < employees.length; i++){
+       totalGross += Number(employees[i].gross);
+       totalTax += Number(employees[i].tax);
+       totalDeduction += Number(employees[i].deduction);
+        totalNet += Number(employees[i].net);
+        if(employees[i].status !== "PROCESSED"){
+      payrollStatus = "REJECTED";
+        }
+        }
+        mc.setProperty("totalGross",totalGross);
+          mc.setProperty("totalTax",totalTax);
+          mc.setProperty("totalDeduction",totalDeduction);
+            mc.setProperty("totalNet",totalNet);
+         mc.setProperty("payrollStatus",payrollStatus);
+        
+        ]]></script>
+    <property name="totalGross" expression="$ctx:totalGross"/>
+    <property name="totalTax" expression="$ctx:totalTax"/>
+    <property name="totalDeduction" expression="$ctx:totalDeduction"/>
+    <property name="totalNet" expression="$ctx:totalNet"/>
+    <property name="payrollStatus" expression="$ctx:payrollStatus"/>
+    <log>
+        <property name="totalGross" expression="$ctx:totalGross"/>
+        <property name="totalTax" expression="$ctx:totalTax"/>
+        <property name="totalDeduction" expression="$ctx:totalDeduction"/>
+        <property name="totalNet" expression="$ctx:totalNet"/>
+        <property name="payrollStatus" expression="$ctx:payrollStatus"/>
+    </log>
+</sequence>

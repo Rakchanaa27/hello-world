@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="tel-Employee-Payroll-v1-iterateemployeevalidation-sequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <filter xpath="string-length(normalize-space($ctx:employeeId)) = 0">
+        <then>
+            <property name="HTTP_SC" value="400" scope="axis2" type="STRING"/>
+            <payloadFactory media-type="json">
+                <format>
+                    {
+                    "errorCode":"INVALID_EMPLOYEEID",
+                    "errorMessage":"employeeId is invalid or empty."
+                    }
+                </format>
+            </payloadFactory>
+            <respond/>
+        </then>
+    </filter>
+    <filter xpath="string-length(normalize-space($ctx:name)) = 0">
+        <then>
+            <property name="HTTP_SC" value="400" scope="axis2" type="STRING"/>
+            <payloadFactory media-type="json">
+                <format>
+                    {
+                    "errorCode":"INVALID_NAME",
+                    "errorMessage":"name is invalid or empty."
+                    }
+                </format>
+            </payloadFactory>
+            <respond/>
+        </then>
+    </filter>
+    <filter xpath="string-length(normalize-space($ctx:basic)) = 0">
+        <then>
+            <property name="HTTP_SC" value="400" scope="axis2" type="STRING"/>
+            <payloadFactory media-type="json">
+                <format>
+                    {
+                    "error":"INVALID_BASIC",
+                    "errorMessage":"basic is invalid or empty."
+                    }
+                </format>
+            </payloadFactory>
+            <respond/>
+        </then>
+    </filter>
+    <filter xpath="string-length(normalize-space($ctx:allowance)) = 0">
+        <then>
+            <property name="HTTP_SC" value="400" scope="axis2" type="STRING"/>
+            <payloadFactory media-type="json">
+                <format>
+                    {
+                    "errorCode":"INVALID_ALLOWANCE",
+                    "errorMessage":"allowance is invalid or empty."
+                    }
+                </format>
+            </payloadFactory>
+            <respond/>
+        </then>
+    </filter>
+    <filter xpath="string-length(normalize-space($ctx:bonus)) = 0">
+        <then>
+            <property name="HTTP_SC" value="400" scope="axis2" type="STRING"/>
+            <payloadFactory media-type="json">
+                <format>
+                    {
+                    "errorCode":"INVALID_BONUS",
+                    "errorMessage":"bonus is invalid or empty."
+                    }
+                </format>
+            </payloadFactory>
+            <respond/>
+        </then>
+    </filter>
+    <filter xpath="string-length(normalize-space($ctx:deduction)) = 0">
+        <then>
+            <property name="HTTP_SC" value="400" scope="axis2" type="STRING"/>
+            <payloadFactory media-type="json">
+                <format>
+                    {
+                    "error":"INVALID_DEDUCTION",
+                    "errorMessage":"deduction is invalid or empty."
+                    }
+                </format>
+            </payloadFactory>
+            <respond/>
+        </then>
+    </filter>
+    <filter xpath="number(get-property('basic')) &lt;= '0'">
+        <then>
+            <property name="HTTP_SC" value="400" scope="axis2" type="STRING"/>
+            <payloadFactory media-type="json">
+                <format>
+                    {
+                    "error":"INVALID_BASIC",
+                    "errorMessage":"basic cannot be less than 0 ."
+                    }
+                </format>
+            </payloadFactory>
+            <respond/>
+        </then>
+    </filter>
+</sequence>

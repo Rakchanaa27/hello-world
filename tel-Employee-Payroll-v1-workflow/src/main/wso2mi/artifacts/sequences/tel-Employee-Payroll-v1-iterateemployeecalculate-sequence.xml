@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="tel-Employee-Payroll-v1-iterateemployeecalculate-sequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <script language="js"><![CDATA[ 
+  
+     var basic = Number(mc.getProperty("basic"));
+      var allowance =  Number(mc.getProperty("allowance"));
+       var bonus =  Number(mc.getProperty("bonus"));
+       var deduction =  Number(mc.getProperty("deduction"));
+       var gross = basic + allowance + bonus;
+       var tax = gross *0.10;
+       var net = gross - tax - deduction;
+      mc.setProperty("gross",gross);
+      mc.setProperty("tax",tax);
+      mc.setProperty("net",net);
+    ]]></script>
+    <property name="gross" expression="$ctx:gross"/>
+    <property name="tax" expression="$ctx:tax"/>
+    <property name="net" expression="$ctx:net"/>
+    <log>
+        <property name="gross" expression="$ctx:gross"/>
+        <property name="tax" expression="$ctx:tax"/>
+        <property name="net" expression="$ctx:net"/>
+    </log>
+    <filter xpath="number(get-property('gross')) &gt;= '70000'">
+        <then>
+            <property name="grade" value="A"/>
+        </then>
+        <else>
+            <filter xpath="number(get-property('gross')) &gt;= '50000'">
+                <then>
+                    <property name="grade" value="B"/>
+                </then>
+                <else>
+                    <filter xpath="number(get-property('gross')) &lt;= '30000'">
+                        <then>
+                            <property name="grade" value="C"/>
+                        </then>
+                        <else>
+                            <property name="grade" value="D"/>
+                        </else>
+                    </filter>
+                </else>
+            </filter>
+        </else>
+    </filter>
+    <filter xpath="number(get-property('net')) &gt; '0'">
+        <then>
+            <property name="status" value="PROCESSED"/>
+        </then>
+        <else>
+            <property name="status" value="REJECTED"/>
+        </else>
+    </filter>
+    <log>
+        <property name="status" expression="$ctx:status"/>
+        <property name="grade" expression="$ctx:grade"/>
+    </log>
+    <payloadFactory media-type="json">
+        <format>
+            {
+            "employeeId": "$1",
+            "name": "$2",
+            "gross": "$3",
+            "tax": "$4",
+            "net": "$5",
+            "deduction": "$6",
+            "grade": "$7",
+            "status": "$8"
+            }
+        </format>
+        <args>
+            <arg expression="$ctx:employeeId"/>
+            <arg expression="$ctx:name"/>
+            <arg expression="$ctx:gross"/>
+            <arg expression="$ctx:tax"/>
+            <arg expression="$ctx:net"/>
+            <arg expression="$ctx:deduction"/>
+            <arg expression="$ctx:grade"/>
+            <arg expression="$ctx:status"/>
+        </args>
+    </payloadFactory>
+</sequence>

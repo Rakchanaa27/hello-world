@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="tel-Employee-Payroll-v1-employeefinal-sequence" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <payloadFactory media-type="json">
+        <format>
+            {
+            "payrollMonth":"$1",
+            "department":"$2",
+            "employeeCount":"$3",
+            "employees":$4,
+            "totalGross": "$5",
+            "totalTax": "$6",
+            "totalDeduction": "$7",
+            "totalNet": "$8",
+            "payrollStatus": "$9",
+            }
+        </format>
+        <args>
+            <arg expression="$ctx:payrollMonth"/>
+            <arg expression="$ctx:department"/>
+            <arg expression="$ctx:employeeCount"/>
+            <arg expression="$ctx:employees"/>
+            <arg expression="$ctx:totalGross"/>
+            <arg expression="$ctx:totalTax"/>
+            <arg expression="$ctx:totalDeduction"/>
+            <arg expression="$ctx:totalNet"/>
+             <arg expression="$ctx:payrollStatus"/>
+        </args>
+    </payloadFactory>
+</sequence>

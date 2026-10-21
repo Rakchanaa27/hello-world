@@ -1,9 +1,0 @@
----
-key: "LoanTransferAPI-1.0.0"
-name: "LoanTransferAPI"
-displayName: "LoanTransferAPI"
-version: "1.0.0"
-serviceUrl: "https://{MI_HOST}:{MI_PORT}/loanTransferAPI/1.0.0"
-definitionType: "OAS3"
-securityType: "BASIC"
-mutualSSLEnabled: false

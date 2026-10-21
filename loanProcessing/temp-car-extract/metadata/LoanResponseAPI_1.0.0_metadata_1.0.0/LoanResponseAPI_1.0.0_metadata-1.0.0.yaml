@@ -1,9 +1,0 @@
----
-key: "LoanResponseAPI-1.0.0"
-name: "LoanResponseAPI"
-displayName: "LoanResponseAPI"
-version: "1.0.0"
-serviceUrl: "https://{MI_HOST}:{MI_PORT}/loanResponseAPI/1.0.0"
-definitionType: "OAS3"
-securityType: "BASIC"
-mutualSSLEnabled: false

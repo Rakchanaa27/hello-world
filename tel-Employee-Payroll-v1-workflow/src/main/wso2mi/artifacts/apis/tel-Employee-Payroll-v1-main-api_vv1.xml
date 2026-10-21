@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/employee" name="tel-Employee-Payroll-v1-main-api" version="v1" version-type="url" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="POST" uri-template="/payroll/process" inSequence="tel-Employee-Payroll-v1-employee-in-sequence" faultSequence="tel-Employee-Payroll-v1-fault-in-sequence"/>
+</api>
