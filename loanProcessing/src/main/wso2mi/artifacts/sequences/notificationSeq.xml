@@ -1,0 +1,9 @@
+<sequence xmlns="http://ws.apache.org/ns/synapse" name="notificationSeq">
+
+<property name="IntegrationName" value="Notification"/>
+<log level="custom">
+        <property name="Status"
+                  value="Send notification"/>
+
+    </log>
+</sequence>

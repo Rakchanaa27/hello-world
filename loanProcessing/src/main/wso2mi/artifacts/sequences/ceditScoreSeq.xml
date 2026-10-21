@@ -1,0 +1,10 @@
+<sequence xmlns="http://ws.apache.org/ns/synapse" name="creditScoreSeq">
+
+   <property name="IntegrationName" value="creditScore"/>
+<log level="custom">
+        <property name="Status"
+                  value="Calculate credit score"/>
+    </log>
+</sequence>
+    
+    

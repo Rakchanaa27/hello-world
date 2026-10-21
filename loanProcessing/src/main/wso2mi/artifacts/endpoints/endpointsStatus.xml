@@ -1,0 +1,17 @@
+<endpoint name="endpointsStatus" xmlns="http://ws.apache.org/ns/synapse">
+    <http method="PUT" uri-template="http://localhost:8080/loanResponseAPI/update">
+        <authentication>
+            <oauth>
+                <clientCredentials>
+                    <clientId>documentVerificationSeq</clientId>
+                    <clientSecret>to verify the document</clientSecret>
+                    <tokenUrl>https://localhost:9445/oauth2/token</tokenUrl>
+                    <authMode>header</authMode>
+                    <connectionTimeout>10000</connectionTimeout>
+                    <connectionRequestTimeout>10000</connectionRequestTimeout>
+                    <socketTimeout>15000</socketTimeout>
+                </clientCredentials>
+            </oauth>
+        </authentication>
+    </http>
+</endpoint>

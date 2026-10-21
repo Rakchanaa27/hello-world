@@ -1,0 +1,11 @@
+<sequence xmlns="http://ws.apache.org/ns/synapse" name="interestCalculationSeq">
+
+<property name="IntegrationName" value="InterestCalculation"/>
+<log level="custom">
+        <property name="Status"
+                  value="Calculate interest"/>
+
+    </log>
+    <sequence key="notificationSeq"/>
+    
+</sequence>

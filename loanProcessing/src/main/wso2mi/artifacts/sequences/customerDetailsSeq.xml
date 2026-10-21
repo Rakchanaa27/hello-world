@@ -1,0 +1,9 @@
+<sequence xmlns="http://ws.apache.org/ns/synapse" name="customerDetailsSeq">
+
+<property name="IntegrationName" value="customerDetails"/>
+<log level="custom">
+        <property name="Status"
+                  value="Fetch customer details"/>
+    </log>
+    
+</sequence>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/loanTransferAPI" name="LoanTransferAPI" version="1.0.1" version-type="url" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="POST" uri-template="/apply" inSequence="ValidationSeq">
+    <inSequence>
+    <log level="custom">
+        <property name="Status" value="Apply for loan"/>    
+    </log>
+    <respond/>
+    </inSequence>
+    </resource>
+    
+
+</api>

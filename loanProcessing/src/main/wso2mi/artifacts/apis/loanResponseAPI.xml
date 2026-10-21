@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/loanResponseAPI" name="LoanResponseAPI" version="1.0.0" version-type="url" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="PUT" uri-template="/update" inSequence="documentVerificationSeq">
+    <outSequence>
+        <send>
+            <endpoint>
+                <address uri="http://localhost:8080/loanResponseAPI/update"/>
+            </endpoint>
+
+        </send>
+        <payloadFactory media-type="json">
+                <format>
+                {
+                  "plan":"UPI"
+                }
+                </format>
+                <args/>
+            </payloadFactory>
+            <respond/>
+    </outSequence>
+        
+    </resource>
+</api>

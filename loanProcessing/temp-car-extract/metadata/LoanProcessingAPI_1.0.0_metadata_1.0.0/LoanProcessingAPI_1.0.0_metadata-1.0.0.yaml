@@ -1,0 +1,9 @@
+---
+key: "LoanProcessingAPI-1.0.0"
+name: "LoanProcessingAPI"
+displayName: "LoanProcessingAPI"
+version: "1.0.0"
+serviceUrl: "https://{MI_HOST}:{MI_PORT}/loanProcessingAPI/1.0.0"
+definitionType: "OAS3"
+securityType: "BASIC"
+mutualSSLEnabled: false
